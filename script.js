@@ -14,3 +14,7 @@ var days = [
 var day = days[now.getDay];
 today = mm + "/" + dd + "/" + yyyy;
 document.write(today);
+
+// make able to save and load to local storage
+// apply past present and future classes based on time hour represents
+// write loop that loops over each div - compares hour of row to hour from moment
