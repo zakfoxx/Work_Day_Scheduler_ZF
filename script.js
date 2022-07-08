@@ -14,8 +14,25 @@ getPlan();
 function savePlan(thePlan, hour) {
   localStorage.setItem(hour, thePlan);
 }
-
-// make able to save and load to local storage
+function colorClasses() {
+  var now = moment();
+  console.log(now.format("LLLL"));
+  console.log(now.hour());
+  $("#currentDay").text(now.format("LLLL"));
+  $(".time-block").each(function () {
+    console.log($(this).attr("id"));
+    var currentHour = parseInt($(this).attr("id").split("-")[1]);
+    console.log(typeof currentHour);
+    if (currentHour === now.hour()) {
+      $(this).children("textarea").addClass("present");
+    } else if (currentHour < now.hour()) {
+      $(this).children("textarea").addClass("past");
+    } else {
+      $(this).children("textarea").addClass("future");
+    }
+  });
+}
+colorClasses();
 // apply past present and future classes based on time hour represents
 // write loop that loops over each div - compares hour of row to hour from moment
 
@@ -24,6 +41,4 @@ $(".saveBtn").on("click", function () {
   var time = $(this).parent().attr("id");
 
   savePlan(value, time);
-
-  // save time and value to localstorage
 });
